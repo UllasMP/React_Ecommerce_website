@@ -1,0 +1,131 @@
+# Context Api
+
+## **Understanding Context API**
+
+**The Context API** can be **used to share data with multiple components**, **without having to pass data through props manually**. **Let’s deal with the similar prop drilling issue with the help of context API as shown below**:
+
+![](https://codewithharry.nyc3.cdn.digitaloceanspaces.com/assets/3db863b7bd0a4236fda440da9cbbd982.png)
+
+## **Getting Started - Context API**
+
+- context
+    - data
+        
+        myContext.jsx
+        
+        myState.jsx
+        
+
+## **Creating Context - In myContext.jsx**
+
+First of all, we have to **import createContext** in the file by using the **import command**. After that, we will be **creating a new context with the help of a predefined syntax** and finally, **we will export the note context as shown in the below figure**:
+
+```jsx
+**import {createContext} from 'react';
+
+const myContext = createContext();
+export default myContext;**
+```
+
+## **Creating State - In myState.jsx**
+
+```jsx
+**import React from 'react'
+import MyContext from './myContext';
+
+function MyState(props) {
+    const state = {
+        name: "Kamal Nayan",
+        class: "9 C"
+    }
+  return (
+    <MyContext.Provider value={state}>
+       {props.children}
+    </MyContext.Provider>
+  )
+}
+
+export default MyState**
+```
+
+![3.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a8c7c088-ac77-4597-a717-0e96f0027811/3.png)
+
+### **Import MyState in App.Js**
+
+```jsx
+**import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import Home from "./pages/home/Home";
+import Blog from "./pages/blog/Blog";
+import NoPage from "./pages/nopage/NoPage";
+import MyState from "./context/data/myState";
+
+function App() {
+  return (
+    <MyState>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/*" element={<NoPage />} />
+        </Routes>
+      </Router>
+    </MyState>
+
+  )
+}
+
+export default App**
+```
+
+### **Using the Created Context -In Home.jsx**
+
+Let’s check if the created context is working or not. In our case, we are using the ‘Home’ page for testing purposes.
+
+```jsx
+**import React, { useContext } from 'react'
+import Layout from '../../components/layout/Layout'
+import myContext from '../../context/data/myContext'
+
+function Home() {
+  const context = useContext(myContext)
+  console.log(context) // {name: 'Kamal Nayan', class: '9 C'}
+  // Destructure 
+  const {name} = context
+  console.log(name) // Kamal Nayan
+  return (
+    <Layout>
+      <h1>Name : {name}</h1>
+    </Layout>
+  )
+}
+
+export default Home**
+```
+
+![Screenshot 2023-07-31 at 4.35.05 PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0ac1398d-a02b-48e3-8b7e-075f2d3bd586/Screenshot_2023-07-31_at_4.35.05_PM.png)
+
+### Multiple State
+
+```jsx
+**import React from 'react'
+import MyContext from './myContext';
+
+function MyState(props) {
+    const state = {
+        name: "Kamal Nayan",
+        class: "9 C"
+    }
+    const myColor = "red"
+  return (
+    <MyContext.Provider value={{state, myColor}}>
+       {props.children}
+    </MyContext.Provider>
+  )
+}
+
+export default MyState**
+```
