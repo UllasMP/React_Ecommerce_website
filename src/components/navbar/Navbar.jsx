@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Fragment } from 'react'
-
-import myContext from '../../context/data/Mycontext'
+import myContext from '../../context/data/myContext'
 import { BsFillCloudSunFill } from 'react-icons/bs'
 import { FiSun } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
@@ -12,7 +11,7 @@ function Navbar() {
 
   const [open, setOpen] = useState(false)
   const context = useContext(myContext)
-  const { mode, toggleMode } = myContext
+  const { mode, toggleMode } = context
 
   return (
     <div className="bg-white sticky top-0 z-50">
@@ -147,7 +146,7 @@ function Navbar() {
         <p
           className="flex h-10 items-center justify-center bg-pink-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
           style={{
-            backgroundColor: mode === 'dark' ? 'rgb(62 64 66)' : '',
+            backgroundColor: mode == 'dark' ? 'rgb(62 64 66)' : '',
             color: mode === 'dark' ? 'white' : '',
           }}
         >

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import myContext from './Mycontext'
+import myContext from './myContext';
 
 function MyState(props) {
   const [mode, setMode] = useState('light');
 
   const toggleMode = () => {
-    if (mode === 'light') {
+    if (mode == 'light') {
       setMode('dark');
       document.body.style.backgroundColor = 'rgb(17, 24, 39)';
     }

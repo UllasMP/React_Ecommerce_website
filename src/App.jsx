@@ -11,6 +11,9 @@ import Cart from './components/pages/cart/Cart';
 import Dashboard from './components/pages/admin/dashboard/Dashboard';
 import Nopage from './components/pages/nopage/Nopage';
 import MyState from './context/data/Mystate';
+import Login from './components/pages/registration/Login';
+import Signup from './components/pages/registration/Signup';
+import Productinfo from './components/pages/productinfo/Productinfo';
 function App() {
   return (
     <MyState>
@@ -18,10 +21,13 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home/>} />
                 <Route path="/order" element={<Order/>} />
-                 <Route path="/cart" element={<Cart/>} />
-                 <Route path="/dashboard" element={<Dashboard/>} />
-                  <Route path="/*" element={<Nopage/>} />
-            </Routes>
+                <Route path="/cart" element={<Cart/>} />
+                <Route path="/dashboard" element={<Dashboard/>} />
+                <Route path="/login" element={<Login/>} />
+                <Route path="/signup" element={<Signup/>} />
+                <Route path="/productinfo/:id" element={<Productinfo/>} />
+                <Route path="/*" element={<Nopage/>} />
+            </Routes> 
         </Router>
     </MyState>
  
